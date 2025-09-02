@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Campus Plant Information</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="config.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header>
+    <h1>🌿 Smart Campus Plant Information</h1>
+    <input id="search" type="search" placeholder="Search by common or scientific name..." />
+  </header>
+
+  <main>
+    <div id="plant-grid" class="grid"></div>
+  </main>
+
+  <footer>
+    <p>Scan a QR near a plant to open its page directly. Or click an item above.</p>
+  </footer>
+</body>
+</html>
