@@ -1,26 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Smart Campus Plant Information</title>
-  <link rel="stylesheet" href="styles.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script defer src="config.js"></script>
-  <script defer src="app.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌿 Smart Campus Plant Information</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>🌿 Smart Campus Plant Information</h1>
-    <input id="search" type="search" placeholder="Search by common or scientific name..." />
-  </header>
+  <h1>🌿 Smart Campus Plant Information</h1>
+  <p>Scan a QR code near a plant or browse the list below:</p>
 
-  <main>
-    <div id="plant-grid" class="grid"></div>
-  </main>
+  <!-- Container where plant info will load -->
+  <div id="plant-list">Loading plants...</div>
 
-  <footer>
-    <p>Scan a QR near a plant to open its page directly. Or click an item above.</p>
-  </footer>
+  <!-- Load Supabase library -->
+  <script src="https://unpkg.com/@supabase/supabase-js"></script>
+
+  <!-- Your project scripts -->
+  <script src="config.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
