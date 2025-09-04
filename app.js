@@ -1,9 +1,9 @@
 // app.js
 
 async function loadPlants() {
-  // Query Supabase table "plants"
+  // Fetch data from Supabase table (make sure the table name is correct)
   let { data, error } = await supabase
-    .from("plants")  // 👈 table name must match exactly what you used in Supabase
+    .from("plants")   // 👈 replace "plants" with your actual table name if different
     .select("*");
 
   if (error) {
@@ -12,7 +12,7 @@ async function loadPlants() {
     return;
   }
 
-  // Render plants on page
+  // Display the plant data on the page
   const container = document.getElementById("plant-list");
   container.innerHTML = "";
   data.forEach(plant => {
