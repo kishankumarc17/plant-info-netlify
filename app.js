@@ -3,7 +3,7 @@
 async function loadPlants() {
   // Fetch data from Supabase table (make sure the table name is correct)
   let { data, error } = await supabase
-    .from("plants")   // replace "plants" with your actual table name if different
+    .from("Smart Campus Plant Information")   // replace "plants" with your actual table name if different
     .select("*");
 
   if (error) {
