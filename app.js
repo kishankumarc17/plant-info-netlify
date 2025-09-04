@@ -8,7 +8,7 @@ async function loadPlants() {
 
   if (error) {
     console.error("Error fetching plants:", error.message);
-    document.getElementById("plant-list").innerHTML = " Failed to load plants.";
+    document.getElementById("plant-list").innerHTML = "❌ Failed to load plants.";
     return;
   }
 
@@ -19,15 +19,15 @@ async function loadPlants() {
     const div = document.createElement("div");
     div.innerHTML = `
       <h3>${plant.common_name} (${plant.scientific_name})</h3>
-      <p> date of planting: ${plant.date_of_planting}</p>
-      <p> max height: ${plant.max_height}</p>
-      <p> origin: ${plant.origin}</p>
-      <p> water requirement: ${plant.water_requirement}</p>
-      <p> seasonal flowering: ${plant.seasonal_flowering}</p>
-      <p> medicinal value: ${plant.medicinal_value}</p>
-      <p> quantitative Data:</strong> ${plant.quantitative_data}</p>
+      <p><strong>Date of Planting:</strong> ${plant.date_of_planting}</p>
+      <p><strong>Max Height:</strong> ${plant.max_height}</p>
+      <p><strong>Origin:</strong> ${plant.origin}</p>
+      <p><strong>Water Requirement:</strong> ${plant.water_requirement}</p>
+      <p><strong>Seasonal Flowering:</strong> ${plant.seasonal_flowering}</p>
+      <p><strong>Medicinal Value:</strong> ${plant.medicinal_value}</p>
+      <p><strong>Quantitative Data:</strong> ${plant.quantitative_data}</p>
+      <p><strong>Location:</strong> ${plant.location}</p>
       <img src="${plant.image_url}" width="200"/>
-      <p> location: ${plant.location}</p>  
     `;
     container.appendChild(div);
   });
