@@ -19,13 +19,14 @@ async function loadPlants() {
     const div = document.createElement("div");
     div.innerHTML = `
       <h3>${plant.common_name} (${plant.scientific_name})</h3>
-      <p> Date of Planting: ${plant.date_of_planting}</p>
-      <p> Max Height: ${plant.max_height}</p>
-      <p> Origin: ${plant.origin}</p>
-      <p> Water Requirement: ${plant.water_requirement}</p>
-      <p> Flowering: ${plant.flowering}</p>
-      <p> Medicinal Value: ${plant.medicinal_value}</p>
+      <p> date of planting: ${plant.date_of_planting}</p>
+      <p> max height: ${plant.max_height}</p>
+      <p> origin: ${plant.origin}</p>
+      <p> water requirement: ${plant.water_requirement}</p>
+      <p> seasonal flowering: ${plant.seasonal_flowering}</p>
+      <p> medicinal value: ${plant.medicinal_value}</p>
       <img src="${plant.image_url}" width="200"/>
+      <p> location: ${plant.location}</p>  
     `;
     container.appendChild(div);
   });
