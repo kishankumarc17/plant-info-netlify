@@ -25,6 +25,7 @@ async function loadPlants() {
       <p> water requirement: ${plant.water_requirement}</p>
       <p> seasonal flowering: ${plant.seasonal_flowering}</p>
       <p> medicinal value: ${plant.medicinal_value}</p>
+      <p> quantitative Data:</strong> ${plant.quantitative_data}</p>
       <img src="${plant.image_url}" width="200"/>
       <p> location: ${plant.location}</p>  
     `;
