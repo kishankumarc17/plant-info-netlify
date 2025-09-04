@@ -8,7 +8,7 @@ async function loadPlants() {
 
   if (error) {
     console.error("Error fetching plants:", error.message);
-    document.getElementById("plant-list").innerHTML = "❌ Failed to load plants.";
+    document.getElementById("plant-list").innerHTML = "Failed to load plants.";
     return;
   }
 
