@@ -4,7 +4,7 @@ async function loadPlants() {
   // Fetch data from Supabase table (✅ use the correct table name: plants)
   let { data, error } = await supabase
     .from("plants")   // your Supabase table is named "plants"
-    .select("*");
+    .select("*");     // fetch all columns including 'category'
 
   if (error) {
     console.error("Error fetching plants:", error.message);
@@ -26,6 +26,7 @@ async function loadPlants() {
     div.className = "plant-card"; // optional CSS styling
     div.innerHTML = `
       <h3>${plant.common_name || "Unknown"} (${plant.scientific_name || "-"})</h3>
+      <p><strong>Category:</strong> ${plant.category || "-"}</p>
       <p><strong>Date of Planting:</strong> ${plant.date_of_planting || "-"}</p>
       <p><strong>Max Height:</strong> ${plant.max_height || "-"}</p>
       <p><strong>Origin:</strong> ${plant.origin || "-"}</p>
