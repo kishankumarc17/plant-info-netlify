@@ -1,4 +1,4 @@
-// app.js
+// app.js (tabular format for each plant)
 
 async function loadPlants() {
   // Fetch data from Supabase table (✅ use the correct table name: plants)
@@ -26,16 +26,21 @@ async function loadPlants() {
     div.className = "plant-card"; // optional CSS styling
     div.innerHTML = `
       <h3>${plant.common_name || "Unknown"} (${plant.scientific_name || "-"})</h3>
-      <p><strong>Category:</strong> ${plant.category || "-"}</p>
-      <p><strong>Date of Planting:</strong> ${plant.date_of_planting || "-"}</p>
-      <p><strong>Max Height:</strong> ${plant.max_height || "-"}</p>
-      <p><strong>Origin:</strong> ${plant.origin || "-"}</p>
-      <p><strong>Water Requirement:</strong> ${plant.water_requirement || "-"}</p>
-      <p><strong>Seasonal Flowering:</strong> ${plant.seasonal_flowering || "-"}</p>
-      <p><strong>Medicinal Value:</strong> ${plant.medicinal_value || "-"}</p>
-      <p><strong>Quantitative Data:</strong> ${plant.quantitative_data || "-"}</p>
-      <p><strong>Location:</strong> ${plant.location || "-"}</p>
-      ${plant.image_url ? `<img src="${plant.image_url}" width="200"/>` : ""}
+      <table class="plant-table">
+        <tr><th>Category</th><td>${plant.category || "-"}</td></tr>
+        <tr><th>Date of Planting</th><td>${plant.date_of_planting || "-"}</td></tr>
+        <tr><th>Max Height</th><td>${plant.max_height || "-"}</td></tr>
+        <tr><th>Origin</th><td>${plant.origin || "-"}</td></tr>
+        <tr><th>Water Requirement</th><td>${plant.water_requirement || "-"}</td></tr>
+        <tr><th>Seasonal Flowering</th><td>${plant.seasonal_flowering || "-"}</td></tr>
+        <tr><th>Medicinal Value</th><td>${plant.medicinal_value || "-"}</td></tr>
+        <tr><th>Quantitative Data</th><td>${plant.quantitative_data || "-"}</td></tr>
+        <tr><th>Location</th><td>${plant.location || "-"}</td></tr>
+        <tr>
+          <th>Image</th>
+          <td>${plant.image_url ? `<img src="${plant.image_url}" width="200"/>` : "-"}</td>
+        </tr>
+      </table>
     `;
     container.appendChild(div);
   });
