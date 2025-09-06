@@ -37,6 +37,7 @@ async function loadPlantDetails() {
       <tr><th>Medicinal Value</th><td>${plant.medicinal_value || "-"}</td></tr>
       <tr><th>Quantitative Data</th><td>${plant.quantitative_data || "-"}</td></tr>
       <tr><th>Location</th><td>${plant.location || "-"}</td></tr>
+      <tr><th>Additional Info</th><td>${plant.additional_info || "-"}</td></tr>
     </table>
   `;
 }
