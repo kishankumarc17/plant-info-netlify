@@ -1,4 +1,4 @@
-// plant.js - with multiple images support
+// plant.js - with multiple images inside table
 
 async function loadPlantDetails() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -25,20 +25,16 @@ async function loadPlantDetails() {
   const plant = data;
 
   // ✅ Handle multiple images
-  let imagesHTML = "";
+  let imagesHTML = "-"; // default dash if no images
   if (plant.image_urls) {
-    const urls = plant.image_urls.split(",").map(url => url.trim()); // split by comma
-    imagesHTML = `
-      <div class="plant-gallery">
-        ${urls.map(url => `<img src="${url}" alt="${plant.common_name}" />`).join("")}
-      </div>
-    `;
+    const urls = plant.image_urls.split(",").map(url => url.trim());
+    imagesHTML = urls
+      .map(url => `<img src="${url}" alt="${plant.common_name}" class="table-image"/>`)
+      .join("");
   }
 
   document.getElementById("plant-card").innerHTML = `
     <h2>${plant.common_name || "Unknown"} (${plant.scientific_name || "-"})</h2>
-    ${imagesHTML}
-
     <table class="plant-table">
       <tr><th>Category</th><td>${plant.category || "-"}</td></tr>
       <tr><th>Date of Planting</th><td>${plant.date_of_planting || "-"}</td></tr>
@@ -50,6 +46,7 @@ async function loadPlantDetails() {
       <tr><th>Quantitative Data</th><td>${plant.quantitative_data || "-"}</td></tr>
       <tr><th>Location</th><td>${plant.location || "-"}</td></tr>
       <tr><th>Additional Info</th><td>${plant.additional_info || "-"}</td></tr>
+      <tr><th>Images</th><td>${imagesHTML}</td></tr>
     </table>
   `;
 }
