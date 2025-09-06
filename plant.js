@@ -1,4 +1,4 @@
-// plant.js - for single plant details in tabular format
+// plant.js - with multiple images support
 
 async function loadPlantDetails() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -22,11 +22,23 @@ async function loadPlantDetails() {
     return;
   }
 
-  // Show plant info in a table
   const plant = data;
+
+  // ✅ Handle multiple images
+  let imagesHTML = "";
+  if (plant.image_urls) {
+    const urls = plant.image_urls.split(",").map(url => url.trim()); // split by comma
+    imagesHTML = `
+      <div class="plant-gallery">
+        ${urls.map(url => `<img src="${url}" alt="${plant.common_name}" />`).join("")}
+      </div>
+    `;
+  }
+
   document.getElementById("plant-card").innerHTML = `
     <h2>${plant.common_name || "Unknown"} (${plant.scientific_name || "-"})</h2>
-    ${plant.image_url ? `<img src="${plant.image_url}" alt="${plant.common_name}" width="300"/>` : ""}
+    ${imagesHTML}
+
     <table class="plant-table">
       <tr><th>Category</th><td>${plant.category || "-"}</td></tr>
       <tr><th>Date of Planting</th><td>${plant.date_of_planting || "-"}</td></tr>
