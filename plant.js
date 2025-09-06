@@ -1,5 +1,4 @@
-// plant.js - with multiple images inside table
-
+// plant.js - with images inside the table
 async function loadPlantDetails() {
   const urlParams = new URLSearchParams(window.location.search);
   const plantId = urlParams.get("id");
@@ -24,13 +23,11 @@ async function loadPlantDetails() {
 
   const plant = data;
 
-  // ✅ Handle multiple images
-  let imagesHTML = "-"; // default dash if no images
+  // ✅ Handle multiple images inside the table
+  let imagesHTML = "-";
   if (plant.image_urls) {
     const urls = plant.image_urls.split(",").map(url => url.trim());
-    imagesHTML = urls
-      .map(url => `<img src="${url}" alt="${plant.common_name}" class="table-image"/>`)
-      .join("");
+    imagesHTML = urls.map(url => `<img src="${url}" class="table-image" alt="${plant.common_name}"/>`).join("");
   }
 
   document.getElementById("plant-card").innerHTML = `
