@@ -1,42 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Plant Details</title>
-  <link rel="stylesheet" href="styles.css"/>
-  
-  <!-- Lightbox CSS -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet" />
+/* 🌱 Plant card container for plant.html */
+.plant-card {
+  padding: 12px;
+  overflow-x: auto; /* scroll if table too wide */
+}
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script defer src="config.js"></script>
-  <script defer src="plant.js"></script> <!-- plant.js will load single plant details -->
-  
-  <!-- Lightbox JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
-</head>
-<body>
-  <header>
-    <h1>🌱 Plant Information</h1>
-  </header>
+/* 🌱 Plant table (original tabular layout) */
+.plant-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  font-size: 15px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(2,8,23,.08);
+}
 
-  <main class="plant-page">
-    <a class="back" href="index.html">← Back to All Plants</a>
-    
-    <!-- Plant details will load here -->
-    <div id="plant-card" class="plant-card">
-      <p>Loading plant details...</p>
-    </div>
-  </main>
+/* 🌱 Table headers */
+.plant-table th {
+  text-align: left;
+  background: #f1f5f9;
+  padding: 10px;
+  width: 35%;
+  color: #0f172a;
+  font-weight: 600;
+  border-bottom: 1px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+}
 
-  <!-- Optional Lightbox Settings -->
-  <script>
-    lightbox.option({
-      'resizeDuration': 200,
-      'wrapAround': true,
-      'fadeDuration': 300
-    })
-  </script>
-</body>
-</html>
+/* 🌱 Table cells */
+.plant-table td {
+  padding: 10px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #fff;
+  vertical-align: middle;
+}
+
+/* 🌱 Last row and column adjustments */
+.plant-table tr:last-child td,
+.plant-table tr:last-child th {
+  border-bottom: none;
+}
+
+.plant-table th:last-child,
+.plant-table td:last-child {
+  border-right: none;
+}
+
+/* 🌱 Images inside table */
+.table-image {
+  max-width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 4px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.table-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+/* 📱 Mobile-friendly (plant page) */
+@media (max-width: 700px) {
+  .plant-table th, .plant-table td {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .table-image {
+    max-width: 70px;
+    height: 70px;
+  }
+
+  .plant-card {
+    padding: 10px;
+  }
+}
