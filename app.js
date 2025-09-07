@@ -1,9 +1,6 @@
-// app.js (homepage with grid layout)
-
+// app.js (homepage with grid cards)
 async function loadPlants() {
-  let { data, error } = await supabase
-    .from("plants")
-    .select("*");
+  let { data, error } = await supabase.from("plants").select("*");
 
   if (error) {
     console.error("Error fetching plants:", error.message);
@@ -19,15 +16,12 @@ async function loadPlants() {
     return;
   }
 
-  // ✅ Add grid wrapper
-  container.className = "grid";
-
   data.forEach(plant => {
-    const commonName = plant.common_name || "Unknown";
-    const scientificName = plant.scientific_name || "";
-
     const div = document.createElement("div");
     div.className = "card";
+
+    const commonName = plant.common_name || "Unknown";
+    const scientificName = plant.scientific_name || "";
 
     div.innerHTML = `
       <a href="plant.html?id=${plant.id}">
