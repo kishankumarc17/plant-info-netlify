@@ -5,9 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Plant Details</title>
   <link rel="stylesheet" href="styles.css"/>
+  
+  <!-- Lightbox CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet" />
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="config.js"></script>
   <script defer src="plant.js"></script> <!-- plant.js will load single plant details -->
+  
+  <!-- Lightbox JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
 </head>
 <body>
   <header>
@@ -22,5 +29,14 @@
       <p>Loading plant details...</p>
     </div>
   </main>
+
+  <!-- Optional Lightbox Settings -->
+  <script>
+    lightbox.option({
+      'resizeDuration': 200,
+      'wrapAround': true,
+      'fadeDuration': 300
+    })
+  </script>
 </body>
 </html>
