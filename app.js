@@ -1,4 +1,4 @@
-// app.js (homepage with clickable links to plant.html)
+// app.js (homepage with clean grid layout)
 
 async function loadPlants() {
   let { data, error } = await supabase
@@ -19,22 +19,31 @@ async function loadPlants() {
     return;
   }
 
-  data.forEach(plant => {
-    const div = document.createElement("div");
-    div.className = "plant-card";
+  // ✅ Grid wrapper
+  const grid = document.createElement("div");
+  grid.className = "grid";
 
-    // ✅ Safe handling (no undefined & no images)
+  data.forEach(plant => {
     const commonName = plant.common_name || "Unknown";
     const scientificName = plant.scientific_name || "";
 
+    const div = document.createElement("div");
+    div.className = "card";
+
     div.innerHTML = `
       <a href="plant.html?id=${plant.id}">
-        <h3>${commonName}</h3>
-        <p><em>${scientificName}</em></p>
+        <div class="body">
+          <h3 class="title">${commonName}</h3>
+          <p class="sub"><em>${scientificName}</em></p>
+        </div>
       </a>
     `;
-    container.appendChild(div);
+
+    grid.appendChild(div);
   });
+
+  container.appendChild(grid);
 }
 
+// Run on page load
 window.onload = loadPlants;
