@@ -1,6 +1,6 @@
-/* 🌱 Plant card container for plant.html */
+/* 🌱 Plant table container */
 .plant-card {
-  overflow-x: auto; /* allows horizontal scroll if table too wide */
+  overflow-x: auto; /* scroll if needed */
   padding: 12px;
 }
 
@@ -13,7 +13,7 @@
   background: white;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(2,8,23,.08);
-  table-layout: fixed; /* keeps borders intact */
+  table-layout: fixed; /* fixed layout keeps borders intact */
 }
 
 /* 🌱 Table headers and cells */
@@ -22,8 +22,8 @@
   padding: 10px;
   border-bottom: 1px solid #e2e8f0;
   border-right: 1px solid #e2e8f0;
-  word-wrap: break-word; /* wraps long text */
-  white-space: normal;   /* allows multi-line text */
+  word-wrap: break-word; /* wrap long text */
+  white-space: normal; /* allow multi-line */
 }
 
 /* Remove right border for last column */
@@ -38,12 +38,10 @@
   border-bottom: none;
 }
 
-/* 🌱 Images inside table cells */
+/* 🌱 Images inside table */
 .table-image {
   max-width: 100px;
-  max-height: 100px;
-  width: auto;
-  height: auto;
+  height: 100px;
   object-fit: cover;
   border-radius: 8px;
   margin: 4px;
@@ -57,19 +55,18 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
-/* 📱 Mobile-friendly adjustments */
+/* 📱 Mobile adjustments */
 @media (max-width: 700px) {
-  .plant-table th, .plant-table td {
+  .plant-table {
     font-size: 13px;
+  }
+
+  .plant-table th, .plant-table td {
     padding: 8px;
   }
 
   .table-image {
     max-width: 70px;
-    max-height: 70px;
-  }
-
-  .plant-card {
-    padding: 10px;
+    height: 70px;
   }
 }
