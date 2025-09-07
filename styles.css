@@ -25,6 +25,8 @@
   border-bottom: 1px solid #e2e8f0;
   background: #fff;
   vertical-align: middle;
+  word-wrap: break-word;   /* ✅ long text wraps */
+  line-height: 1.5;
 }
 
 .plant-table tr:last-child td,
@@ -47,6 +49,18 @@
 .table-image:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+/* 🌱 Links in Additional Info */
+.plant-link {
+  color: #0ea5e9;
+  text-decoration: none;
+  font-weight: 500;
+  word-break: break-word; /* ✅ prevents overflow on mobiles */
+}
+
+.plant-link:hover {
+  text-decoration: underline;
 }
 
 /* 📱 Mobile-friendly */
