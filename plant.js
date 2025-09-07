@@ -1,4 +1,4 @@
-// plant.js - with clickable links in Additional Info
+// plant.js - with clickable links in Additional Info & expandable images
 async function loadPlantDetails() {
   const urlParams = new URLSearchParams(window.location.search);
   const plantId = urlParams.get("id");
@@ -25,11 +25,18 @@ async function loadPlantDetails() {
 
   const plant = data;
 
-  // ✅ Handle multiple images inside the table
+  // ✅ Handle multiple images inside the table with Lightbox
   let imagesHTML = "-";
   if (plant.image_urls) {
     const urls = plant.image_urls.split(",").map(url => url.trim());
-    imagesHTML = urls.map(url => `<img src="${url}" class="table-image" alt="${plant.common_name}"/>`).join("");
+    imagesHTML = urls
+      .map(
+        (url) =>
+          `<a href="${url}" data-lightbox="${plant.common_name}" data-title="${plant.common_name}">
+            <img src="${url}" class="table-image" alt="${plant.common_name}" style="width:100px; cursor:pointer; margin-right:5px;" />
+          </a>`
+      )
+      .join("");
   }
 
   // ✅ Make links inside Additional Info clickable
@@ -40,6 +47,7 @@ async function loadPlantDetails() {
       )
     : "-";
 
+  // Inject the table HTML
   document.getElementById("plant-card").innerHTML = `
     <h2>${plant.common_name || "Unknown"} (${plant.scientific_name || "-"})</h2>
     <table class="plant-table">
