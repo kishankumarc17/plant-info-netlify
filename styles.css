@@ -1,72 +1,34 @@
-/* 🌱 Plant table container */
+/* 🌱 Make plant table responsive on mobile */
 .plant-card {
-  overflow-x: auto; /* scroll if needed */
+  overflow-x: auto; /* allows horizontal scroll if table too wide */
   padding: 12px;
 }
 
-/* 🌱 Plant table */
 .plant-table {
   width: 100%;
+  min-width: 300px; /* ensures table has minimum width */
   border-collapse: collapse;
   margin-top: 16px;
   font-size: 15px;
   background: white;
   border-radius: 12px;
+  overflow: hidden;
   box-shadow: 0 4px 20px rgba(2,8,23,.08);
-  table-layout: fixed; /* fixed layout keeps borders intact */
 }
 
-/* 🌱 Table headers and cells */
-.plant-table th, .plant-table td {
-  text-align: left;
-  padding: 10px;
-  border-bottom: 1px solid #e2e8f0;
-  border-right: 1px solid #e2e8f0;
-  word-wrap: break-word; /* wrap long text */
-  white-space: normal; /* allow multi-line */
-}
-
-/* Remove right border for last column */
-.plant-table th:last-child,
-.plant-table td:last-child {
-  border-right: none;
-}
-
-/* Remove bottom border for last row */
-.plant-table tr:last-child td,
-.plant-table tr:last-child th {
-  border-bottom: none;
-}
-
-/* 🌱 Images inside table */
-.table-image {
-  max-width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin: 4px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.table-image:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-}
-
-/* 📱 Mobile adjustments */
+/* 📱 Mobile-friendly adjustments */
 @media (max-width: 700px) {
-  .plant-table {
-    font-size: 13px;
-  }
-
   .plant-table th, .plant-table td {
+    font-size: 13px;
     padding: 8px;
   }
 
   .table-image {
     max-width: 70px;
     height: 70px;
+  }
+
+  .plant-card {
+    padding: 10px;
   }
 }
