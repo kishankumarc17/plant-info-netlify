@@ -1,4 +1,4 @@
-// plant.js - with images inside the table
+// plant.js - with debug log
 async function loadPlantDetails() {
   const urlParams = new URLSearchParams(window.location.search);
   const plantId = urlParams.get("id");
@@ -20,6 +20,8 @@ async function loadPlantDetails() {
     document.getElementById("plant-card").innerHTML = "❌ Failed to load plant.";
     return;
   }
+
+  console.log("Fetched plant:", data); // 👈 DEBUG LOG
 
   const plant = data;
 
@@ -48,5 +50,4 @@ async function loadPlantDetails() {
   `;
 }
 
-// Run on page load
 window.onload = loadPlantDetails;
