@@ -1,4 +1,4 @@
-// plant.js - with debug log
+// plant.js - with clickable links in Additional Info
 async function loadPlantDetails() {
   const urlParams = new URLSearchParams(window.location.search);
   const plantId = urlParams.get("id");
@@ -32,6 +32,14 @@ async function loadPlantDetails() {
     imagesHTML = urls.map(url => `<img src="${url}" class="table-image" alt="${plant.common_name}"/>`).join("");
   }
 
+  // ✅ Make links inside Additional Info clickable
+  let additionalInfoHTML = plant.additional_info
+    ? plant.additional_info.replace(
+        /(https?:\/\/[^\s]+)/g,
+        '<a href="$1" target="_blank" class="plant-link">$1</a>'
+      )
+    : "-";
+
   document.getElementById("plant-card").innerHTML = `
     <h2>${plant.common_name || "Unknown"} (${plant.scientific_name || "-"})</h2>
     <table class="plant-table">
@@ -44,7 +52,7 @@ async function loadPlantDetails() {
       <tr><th>Medicinal Value</th><td>${plant.medicinal_value || "-"}</td></tr>
       <tr><th>Quantitative Data</th><td>${plant.quantitative_data || "-"}</td></tr>
       <tr><th>Location</th><td>${plant.location || "-"}</td></tr>
-      <tr><th>Additional Info</th><td>${plant.additional_info || "-"}</td></tr>
+      <tr><th>Additional Info</th><td>${additionalInfoHTML}</td></tr>
       <tr><th>Images</th><td>${imagesHTML}</td></tr>
     </table>
   `;
