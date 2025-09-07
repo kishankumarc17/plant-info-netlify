@@ -1,84 +1,32 @@
-/* 🌱 Homepage plant list grid */
-#plant-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 16px;
-  padding: 20px;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Campus Plant Information</title>
+  <link rel="stylesheet" href="styles.css"> <!-- connect CSS -->
+</head>
+<body>
+  <header>
+    <h1>🌱 Smart Campus Plant Information</h1>
+  </header>
 
-/* 🌱 Plant card styling (homepage) */
-.plant-card {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(2,8,23,.08);
-  overflow: hidden;
-  border: 1px solid #e2e8f0;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  padding: 14px;
-  text-align: center;
-}
+  <main>
+    <p>Scan a QR code near a plant or browse the list below:</p>
 
-.plant-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 24px rgba(2,8,23,.12);
-}
+    <!-- Plant list container (grid cards will be inserted here by app.js) -->
+    <div id="plant-list" class="grid">Loading plants...</div>
+  </main>
 
-.plant-card h3 {
-  font-weight: 700;
-  margin: 0 0 6px;
-  font-size: 18px;
-  color: #0f172a;
-}
+  <!-- Footer with team credits -->
+  <footer class="site-footer">
+    <p>Developed with 🌱 by <strong>Khushi M, Gowthami N, Kishan Kumar C, and Jaffer Hameed</strong></p>
+    <p class="small-text">&copy; 2025 Smart Campus Project</p>
+  </footer>
 
-.plant-card p {
-  margin: 0;
-  color: #475569;
-  font-size: 14px;
-  font-style: italic;
-}
-
-/* 🌱 Plant card images */
-.plant-card img {
-  width: 100%;
-  height: 140px;  /* desktop height */
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 6px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.plant-card img:hover {
-  transform: scale(1.03);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-}
-
-/* 🌱 Footer styling */
-.site-footer {
-  text-align: center;
-  font-size: 13px;
-  color: #666;
-  padding: 12px 0;
-  margin-top: 30px;
-  border-top: 1px solid #e2e8f0;
-  background: #f9f9f9;
-}
-
-.site-footer p {
-  margin: 4px 0;
-}
-
-.site-footer .small-text {
-  font-size: 11px;
-  color: #888;
-}
-
-/* 📱 Mobile-friendly (homepage) */
-@media (max-width: 700px) {
-  #plant-list {
-    grid-template-columns: 1fr;  /* single column on mobile */
-  }
-
-  .plant-card img {
-    height: 120px;  /* mobile image height */
-  }
-}
+  <!-- Supabase client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
