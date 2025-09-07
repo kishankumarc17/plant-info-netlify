@@ -1,3 +1,42 @@
+/* 🌱 Homepage plant list grid */
+#plant-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  padding: 20px;
+}
+
+/* 🌱 Plant card styling (homepage) */
+.plant-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(2,8,23,.08);
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 14px;
+  text-align: center;
+}
+
+.plant-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 24px rgba(2,8,23,.12);
+}
+
+.plant-card h3 {
+  font-weight: 700;
+  margin: 0 0 6px;
+  font-size: 18px;
+  color: #0f172a;
+}
+
+.plant-card p {
+  margin: 0;
+  color: #475569;
+  font-size: 14px;
+  font-style: italic;
+}
+
 /* 🌱 TABLE FORMAT STYLING (for plant.html) */
 .plant-table {
   width: 100%;
@@ -31,4 +70,37 @@
 .plant-table tr:last-child td,
 .plant-table tr:last-child th {
   border-bottom: none;
+}
+
+/* 🌱 Images inside table cells */
+.table-image {
+  max-width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 4px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.table-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+/* 📱 Mobile-friendly */
+@media (max-width: 700px) {
+  #plant-list {
+    grid-template-columns: 1fr;
+  }
+
+  .plant-table {
+    font-size: 13px;
+  }
+
+  .table-image {
+    max-width: 70px;
+    height: 70px;
+  }
 }
