@@ -1,4 +1,4 @@
-// app.js (homepage with clean grid layout)
+// app.js (homepage with grid layout)
 
 async function loadPlants() {
   let { data, error } = await supabase
@@ -19,9 +19,8 @@ async function loadPlants() {
     return;
   }
 
-  // ✅ Grid wrapper
-  const grid = document.createElement("div");
-  grid.className = "grid";
+  // ✅ Add grid wrapper
+  container.className = "grid";
 
   data.forEach(plant => {
     const commonName = plant.common_name || "Unknown";
@@ -39,11 +38,8 @@ async function loadPlants() {
       </a>
     `;
 
-    grid.appendChild(div);
+    container.appendChild(div);
   });
-
-  container.appendChild(grid);
 }
 
-// Run on page load
 window.onload = loadPlants;
