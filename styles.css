@@ -1,62 +1,12 @@
-/* 🌱 Homepage plant list grid */
-#plant-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 16px;
-  padding: 20px;
-}
-
-/* 🌱 Plant card styling (homepage) */
+/* 🌱 Make plant table responsive inside plant page */
 .plant-card {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(2,8,23,.08);
-  overflow: hidden;
-  border: 1px solid #e2e8f0;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  padding: 14px;
-  text-align: center;
+  overflow-x: auto; /* allows horizontal scroll if table is too wide */
+  padding: 12px;
 }
 
-.plant-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 24px rgba(2,8,23,.12);
-}
-
-/* 🌱 Plant card image */
-.plant-card img {
-  width: 100%;
-  height: 140px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 8px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.plant-card img:hover {
-  transform: scale(1.03);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-}
-
-/* 🌱 Plant name */
-.plant-card h3 {
-  font-weight: 700;
-  margin: 4px 0 2px;
-  font-size: 18px;
-  color: #0f172a;
-}
-
-/* 🌱 Plant subtitle (scientific name / category) */
-.plant-card p {
-  margin: 0;
-  color: #475569;
-  font-size: 13px;
-  font-style: italic;
-}
-
-/* 🌱 TABLE FORMAT STYLING (for plant.html) */
 .plant-table {
   width: 100%;
+  min-width: 300px; /* ensures table does not shrink too much */
   border-collapse: collapse;
   margin-top: 16px;
   font-size: 15px;
@@ -66,74 +16,17 @@
   box-shadow: 0 4px 20px rgba(2,8,23,.08);
 }
 
-.plant-table th {
-  text-align: left;
-  background: #f1f5f9;
-  padding: 10px;
-  width: 35%;
-  color: #0f172a;
-  font-weight: 600;
-  border-bottom: 1px solid #e2e8f0;
-  border-right: 1px solid #e2e8f0;
+/* Allow text inside table cells to wrap */
+.plant-table th, .plant-table td {
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
-.plant-table td {
-  padding: 10px;
-  border-bottom: 1px solid #e2e8f0;
-  background: #fff;
-  vertical-align: middle;
-}
-
-.plant-table tr:last-child td,
-.plant-table tr:last-child th {
-  border-bottom: none;
-}
-
-/* 🌱 Images inside table cells */
-.table-image {
-  max-width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin: 4px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.table-image:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-}
-
-/* 🌱 Footer styling */
-.site-footer {
-  text-align: center;
-  font-size: 13px;
-  color: #666;
-  padding: 12px 0;
-  margin-top: 30px;
-  border-top: 1px solid #e2e8f0;
-  background: #f9f9f9;
-}
-
-.site-footer p {
-  margin: 4px 0;
-}
-
-.site-footer .small-text {
-  font-size: 11px;
-  color: #888;
-}
-
-/* 📱 Mobile-friendly */
+/* Mobile adjustments */
 @media (max-width: 700px) {
-  #plant-list {
-    grid-template-columns: 1fr;
-  }
-
-  .plant-table {
+  .plant-table th, .plant-table td {
     font-size: 13px;
+    padding: 8px;
   }
 
   .table-image {
@@ -141,7 +34,7 @@
     height: 70px;
   }
 
-  .plant-card img {
-    height: 120px;
+  .plant-card {
+    padding: 10px;
   }
 }
