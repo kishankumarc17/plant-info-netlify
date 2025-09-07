@@ -9,7 +9,6 @@
   background: white;
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(2,8,23,.08);
-  overflow: hidden;
   border: 1px solid #e2e8f0;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
