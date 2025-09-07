@@ -3,21 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <title>Smart Campus Plant Information</title>
+  <link rel="stylesheet" href="styles.css"> <!-- ✅ Link to your CSS -->
 </head>
 <body>
-  <h1>Smart Campus Plant Information</h1>
-  <p>Scan a QR code near a plant or browse the list below:</p>
+  <header>
+    <h1>🌱 Smart Campus Plant Information</h1>
+  </header>
 
-  <!-- Plant list will load here -->
-  <div id="plant-list">Loading plants...</div>
+  <main>
+    <p>Scan a QR code near a plant or browse the list below:</p>
+
+    <!-- Plant list will load here -->
+    <div id="plant-list" class="grid">Loading plants...</div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Smart Campus Project</p>
+  </footer>
 
   <!-- Supabase client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-
-  <!-- Your config -->
   <script src="config.js"></script>
-
-  <!-- Your app logic -->
   <script src="app.js"></script>
 </body>
 </html>
