@@ -23,12 +23,19 @@ async function loadPlants() {
     const div = document.createElement("div");
     div.className = "plant-card";
 
+    // ✅ Safe handling: no more "undefined"
+    const commonName = plant.common_name || "Unknown";
+    const scientificName = plant.scientific_name || "";
+    const imageHTML = plant.image_url 
+      ? `<img src="${plant.image_url}" width="180" alt="${commonName}"/>` 
+      : "";
+
     // Clicking a card will take you to plant.html?id=<plant.id>
     div.innerHTML = `
       <a href="plant.html?id=${plant.id}">
-        <h3>${plant.common_name || "Unknown"}</h3>
-        <p><em>${plant.scientific_name || "-"}</em></p>
-        ${plant.image_url ? `<img src="${plant.image_url}" width="180"/>` : ""}
+        <h3>${commonName}</h3>
+        <p><em>${scientificName}</em></p>
+        ${imageHTML}
       </a>
     `;
     container.appendChild(div);
