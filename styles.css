@@ -1,14 +1,15 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 16px;
   padding: 20px;
 }
 
 .card {
   background: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(2,8,23,.08);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  overflow: hidden;
   border: 1px solid #e2e8f0;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -26,7 +27,6 @@
   font-weight: 700;
   margin: 0 0 6px;
   font-size: 18px;
-  color: #0f172a;
 }
 
 .card .sub {
