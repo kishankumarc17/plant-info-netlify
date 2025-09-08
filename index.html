@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Smart Campus Plant Information</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css"> <!-- ✅ connect CSS -->
 </head>
 <body>
   <header>
@@ -14,17 +13,17 @@
   <main>
     <p>Scan a QR code near a plant or browse the list below:</p>
 
-    <!-- Plant list container -->
+    <!-- Plant list will load here -->
     <div id="plant-list" class="grid">Loading plants...</div>
   </main>
 
-  <footer class="site-footer">
-    <p>Developed with 🌱 by <strong>Khushi M, Gowthami, Kishan Kumar C, and Jaffer Hameed</strong></p>
-    <p class="small-text">&copy; 2025 Smart Campus Project</p>
+  <footer>
+    <p>&copy; 2025 Smart Campus Project</p>
   </footer>
 
-  <!-- Supabase JS, config, and app -->
+  <!-- Supabase client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script src="config.js"></script>
-  <script>
-    // ✅ Load plants dynamically using supabase from
+  <script src="app.js"></script>
+</body>
+</html>
