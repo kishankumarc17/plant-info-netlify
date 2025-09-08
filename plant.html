@@ -59,34 +59,83 @@
 </head>
 <body>
   <div class="plant-container">
-    <h2>Aloe Vera/ಅಲೋವೇರಾ (Aloe barbadensis miller)</h2>
-    <table>
-      <tr><th>Category</th><td>Succulent / Medicinal herb</td></tr>
-      <tr><th>Date of Planting</th><td>-</td></tr>
-      <tr><th>Max Height</th><td>60–100 cm (about 2–3 feet)</td></tr>
-      <tr><th>Origin</th><td>Arabian Peninsula (now cultivated worldwide, especially in tropical and subtropical regions)</td></tr>
-      <tr><th>Water Requirement</th><td>Very low – about 300–500 ml once a week (allow soil to dry completely between watering; in hot summers it may need twice a week)</td></tr>
-      <tr><th>Seasonal Flowering</th><td>Spring to summer (yellow/orange tubular flowers)</td></tr>
-      <tr><th>Medicinal Value</th><td>Gel used for skin burns, wounds, and moisturizing. Improves digestion, has anti-inflammatory properties, and supports immune health.</td></tr>
-      <tr><th>Quantitative Data</th><td>Lifespan: 5–12 years. Mature leaf contains ~15–20 ml gel. Oxygen: Provides moderate oxygen release, especially at night (CAM plant).</td></tr>
-      <tr><th>Location</th><td>-</td></tr>
-      <tr><th>Additional Info</th><td>Aloe vera can survive without soil — its gel-filled leaves store enough water to grow even in just rocks or sand. 
-        <a href="https://en.wikipedia.org/wiki/Aloe_vera" target="_blank">Read More</a>
-      </td></tr>
-    </table>
+    <h2 id="plant-title">Loading...</h2>
+    <table id="plant-table"></table>
 
     <h3>Images</h3>
-    <div class="images">
-      <a href="your_image1.jpg" data-lightbox="plant" data-title="Aloe Vera Image 1">
-        <img src="your_image1.jpg" alt="Aloe Vera Image 1">
-      </a>
-      <a href="your_image2.jpg" data-lightbox="plant" data-title="Aloe Vera Image 2">
-        <img src="your_image2.jpg" alt="Aloe Vera Image 2">
-      </a>
-    </div>
+    <div class="images" id="plant-images"></div>
   </div>
 
-  <!-- Lightbox JS -->
+  <!-- Supabase & Lightbox JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    // ✅ Initialize Supabase (replace with your project keys)
+    const supabase = window.supabase.createClient(
+      "https://YOUR-PROJECT-URL.supabase.co",
+      "YOUR-ANON-KEY"
+    );
+
+    async function loadPlantDetails() {
+      const params = new URLSearchParams(window.location.search);
+      const plantId = params.get("id");
+
+      if (!plantId) {
+        document.getElementById("plant-title").innerText = "❌ Plant not found.";
+        return;
+      }
+
+      const { data: plant, error } = await supabase
+        .from("plants")
+        .select("*")
+        .eq("id", plantId)
+        .single();
+
+      if (error || !plant) {
+        document.getElementById("plant-title").innerText = "❌ Error loading plant.";
+        return;
+      }
+
+      // Update title
+      document.getElementById("plant-title").innerText = `${plant.common_name} (${plant.scientific_name})`;
+
+      // Fill table dynamically
+      const table = document.getElementById("plant-table");
+      table.innerHTML = `
+        <tr><th>Category</th><td>${plant.category || "-"}</td></tr>
+        <tr><th>Date of Planting</th><td>${plant.date_of_planting || "-"}</td></tr>
+        <tr><th>Max Height</th><td>${plant.max_height || "-"}</td></tr>
+        <tr><th>Origin</th><td>${plant.origin || "-"}</td></tr>
+        <tr><th>Water Requirement</th><td>${plant.water_requirement || "-"}</td></tr>
+        <tr><th>Seasonal Flowering</th><td>${plant.seasonal_flowering || "-"}</td></tr>
+        <tr><th>Medicinal Value</th><td>${plant.medicinal_value || "-"}</td></tr>
+        <tr><th>Quantitative Data</th><td>${plant.quantitative_data || "-"}</td></tr>
+        <tr><th>Location</th><td>${plant.location || "-"}</td></tr>
+        <tr><th>Additional Info</th><td>${plant.additional_info || "-"}</td></tr>
+      `;
+
+      // Load images (comma-separated URLs in DB)
+      const imageContainer = document.getElementById("plant-images");
+      imageContainer.innerHTML = "";
+      if (plant.image_urls) {
+        const urls = plant.image_urls.split(",");
+        urls.forEach((url, idx) => {
+          const cleanUrl = url.trim();
+          if (cleanUrl) {
+            imageContainer.innerHTML += `
+              <a href="${cleanUrl}" data-lightbox="plant" data-title="${plant.common_name} - Image ${idx+1}">
+                <img src="${cleanUrl}" alt="${plant.common_name} Image ${idx+1}">
+              </a>
+            `;
+          }
+        });
+      } else {
+        imageContainer.innerHTML = "<p>No images available.</p>";
+      }
+    }
+
+    window.onload = loadPlantDetails;
+  </script>
 </body>
 </html>
