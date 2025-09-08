@@ -1,15 +1,16 @@
 // plant.js - load plant details dynamically by ID
 
-// ✅ Initialize Supabase (use config.js or replace with real keys)
-const supabaseUrl = "https://YOUR_REAL_SUPABASE_URL.supabase.co"; // replace
-const supabaseKey = "YOUR_REAL_ANON_KEY"; // replace
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+// ✅ Use Supabase client from config.js
+// Make sure config.js is included in plant.html before this script
+// const supabase is already initialized in config.js
 
 async function loadPlantDetails() {
   const urlParams = new URLSearchParams(window.location.search);
   const plantId = urlParams.get("id");
 
-  const container = document.getElementById("plant-card");
+  const container = document.getElementById("plant-card") || document.getElementById("plant-container");
+  if (!container) return;
+
   if (!plantId) {
     container.innerHTML = "<p>❌ No plant selected.</p>";
     return;
@@ -25,20 +26,20 @@ async function loadPlantDetails() {
 
     if (error || !plant) {
       console.error("Error fetching plant:", error?.message);
-      container.innerHTML = "❌ Failed to load plant details.";
+      container.innerHTML = "<p>❌ Failed to load plant details.</p>";
       return;
     }
 
     console.log("Fetched plant:", plant); // 🔍 DEBUG
 
     // ✅ Multiple images with Lightbox
-    let imagesHTML = "-";
+    let imagesHTML = "<p>No images available.</p>";
     if (plant.image_urls) {
       const urls = plant.image_urls.split(",").map((url) => url.trim());
       imagesHTML = urls
         .map(
-          (url) => `
-            <a href="${url}" data-lightbox="${plant.common_name}" data-title="${plant.common_name}">
+          (url, idx) => `
+            <a href="${url}" data-lightbox="${plant.common_name}" data-title="${plant.common_name} - Image ${idx+1}">
               <img src="${url}" class="table-image" alt="${plant.common_name}" 
                    style="width:100px; cursor:pointer; margin-right:5px;" />
             </a>`
@@ -54,10 +55,9 @@ async function loadPlantDetails() {
         )
       : "-";
 
-    // ✅ Inject plant details into the table
+    // ✅ Inject plant details into the container
     container.innerHTML = `
-      <h2>${plant.common_name || "Unknown"} 
-          (${plant.scientific_name || "-"})</h2>
+      <h2>${plant.common_name || "Unknown"} (${plant.scientific_name || "-"})</h2>
       <table class="plant-table">
         <tr><th>Category</th><td>${plant.category || "-"}</td></tr>
         <tr><th>Date of Planting</th><td>${plant.date_of_planting || "-"}</td></tr>
@@ -74,8 +74,7 @@ async function loadPlantDetails() {
     `;
   } catch (err) {
     console.error("Unexpected error:", err);
-    container.innerHTML =
-      "❌ Something went wrong while loading plant.";
+    container.innerHTML = "<p>❌ Something went wrong while loading plant.</p>";
   }
 }
 
