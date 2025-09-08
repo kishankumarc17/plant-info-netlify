@@ -1,45 +1,43 @@
-// app.js - homepage grid cards
+// app.js
 async function loadPlants() {
   const container = document.getElementById("plant-list");
-  container.innerHTML = "";
+  container.innerHTML = "Loading plants...";
 
   try {
-    const { data: plants, error } = await supabase.from("plants").select("*");
-    if (error) throw error;
+    const { data: plants, error } = await supabase
+      .from("plants")
+      .select("*");
 
-    if (!plants || plants.length === 0) {
-      container.innerHTML = "<p>No plant records found in database.</p>";
+    if (error) {
+      container.innerHTML = "<p>❌ Error loading plants.</p>";
+      console.error(error);
       return;
     }
 
-    // Sort alphabetically
-    plants.sort((a, b) => (a.common_name || "").localeCompare(b.common_name || ""));
+    if (!plants || plants.length === 0) {
+      container.innerHTML = "<p>No plants found.</p>";
+      return;
+    }
+
+    container.innerHTML = ""; // Clear loading text
 
     plants.forEach(plant => {
       const card = document.createElement("div");
-      card.className = "plant-card";
-
-      const commonName = plant.common_name || "Unknown";
-      const scientificName = plant.scientific_name || "";
-      const thumbnail = plant.image_urls
-        ? plant.image_urls.split(",")[0].trim()
-        : "placeholder.jpg";
+      card.className = "card";
 
       card.innerHTML = `
-        <a href="plant.html?id=${plant.id}">
-          <img src="${thumbnail}" alt="${commonName}" />
-          <h3>${commonName}</h3>
-          <p><em>${scientificName}</em></p>
-        </a>
+        <img src="${plant.image}" alt="${plant.name}">
+        <h3>${plant.name}</h3>
+        <p><strong>Scientific Name:</strong> ${plant.scientific_name}</p>
+        <a href="plant.html?id=${plant.id}">View Details</a>
       `;
 
       container.appendChild(card);
     });
-
   } catch (err) {
-    console.error("Error fetching plants:", err.message);
-    container.innerHTML = "❌ Failed to load plants.";
+    container.innerHTML = "<p>❌ Error loading plants.</p>";
+    console.error(err);
   }
 }
 
-window.onload = loadPlants;
+loadPlants();
