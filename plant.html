@@ -71,71 +71,44 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script>
-    // ✅ Initialize Supabase (replace with your project keys)
-    const supabase = window.supabase.createClient(
-      "https://YOUR-PROJECT-URL.supabase.co",
-      "YOUR-ANON-KEY"
-    );
+    // ✅ Initialize Supabase (replace with your actual keys)
+    const supabaseUrl = "https://YOUR_REAL_SUPABASE_URL.supabase.co"; // Replace
+    const supabaseKey = "YOUR_REAL_ANON_KEY"; // Replace
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
     async function loadPlantDetails() {
       const params = new URLSearchParams(window.location.search);
       const plantId = params.get("id");
 
+      const titleEl = document.getElementById("plant-title");
+      const tableEl = document.getElementById("plant-table");
+      const imagesEl = document.getElementById("plant-images");
+
       if (!plantId) {
-        document.getElementById("plant-title").innerText = "❌ Plant not found.";
+        titleEl.innerText = "❌ Plant not found.";
+        tableEl.innerHTML = "";
+        imagesEl.innerHTML = "";
         return;
       }
 
-      const { data: plant, error } = await supabase
-        .from("plants")
-        .select("*")
-        .eq("id", plantId)
-        .single();
+      try {
+        const { data: plant, error } = await supabase
+          .from("plants")
+          .select("*")
+          .eq("id", plantId)
+          .single();
 
-      if (error || !plant) {
-        document.getElementById("plant-title").innerText = "❌ Error loading plant.";
-        return;
-      }
+        if (error || !plant) {
+          titleEl.innerText = "❌ Error loading plant.";
+          tableEl.innerHTML = "";
+          imagesEl.innerHTML = "";
+          console.error(error);
+          return;
+        }
 
-      // Update title
-      document.getElementById("plant-title").innerText = `${plant.common_name} (${plant.scientific_name})`;
+        // Update title
+        titleEl.innerText = `${plant.common_name || "-"} (${plant.scientific_name || "-"})`;
 
-      // Fill table dynamically
-      const table = document.getElementById("plant-table");
-      table.innerHTML = `
-        <tr><th>Category</th><td>${plant.category || "-"}</td></tr>
-        <tr><th>Date of Planting</th><td>${plant.date_of_planting || "-"}</td></tr>
-        <tr><th>Max Height</th><td>${plant.max_height || "-"}</td></tr>
-        <tr><th>Origin</th><td>${plant.origin || "-"}</td></tr>
-        <tr><th>Water Requirement</th><td>${plant.water_requirement || "-"}</td></tr>
-        <tr><th>Seasonal Flowering</th><td>${plant.seasonal_flowering || "-"}</td></tr>
-        <tr><th>Medicinal Value</th><td>${plant.medicinal_value || "-"}</td></tr>
-        <tr><th>Quantitative Data</th><td>${plant.quantitative_data || "-"}</td></tr>
-        <tr><th>Location</th><td>${plant.location || "-"}</td></tr>
-        <tr><th>Additional Info</th><td>${plant.additional_info || "-"}</td></tr>
-      `;
-
-      // Load images (comma-separated URLs in DB)
-      const imageContainer = document.getElementById("plant-images");
-      imageContainer.innerHTML = "";
-      if (plant.image_urls) {
-        const urls = plant.image_urls.split(",");
-        urls.forEach((url, idx) => {
-          const cleanUrl = url.trim();
-          if (cleanUrl) {
-            imageContainer.innerHTML += `
-              <a href="${cleanUrl}" data-lightbox="plant" data-title="${plant.common_name} - Image ${idx+1}">
-                <img src="${cleanUrl}" alt="${plant.common_name} Image ${idx+1}">
-              </a>
-            `;
-          }
-        });
-      } else {
-        imageContainer.innerHTML = "<p>No images available.</p>";
-      }
-    }
-
-    window.onload = loadPlantDetails;
-  </script>
-</body>
-</html>
+        // Fill table dynamically
+        tableEl.innerHTML = `
+          <tr><th>Category</th><td>
