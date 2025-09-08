@@ -68,47 +68,8 @@
 
   <!-- Supabase & Lightbox JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <script>
-    // ✅ Initialize Supabase (replace with your actual keys)
-    const supabaseUrl = "https://YOUR_REAL_SUPABASE_URL.supabase.co"; // Replace
-    const supabaseKey = "YOUR_REAL_ANON_KEY"; // Replace
-    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
-
-    async function loadPlantDetails() {
-      const params = new URLSearchParams(window.location.search);
-      const plantId = params.get("id");
-
-      const titleEl = document.getElementById("plant-title");
-      const tableEl = document.getElementById("plant-table");
-      const imagesEl = document.getElementById("plant-images");
-
-      if (!plantId) {
-        titleEl.innerText = "❌ Plant not found.";
-        tableEl.innerHTML = "";
-        imagesEl.innerHTML = "";
-        return;
-      }
-
-      try {
-        const { data: plant, error } = await supabase
-          .from("plants")
-          .select("*")
-          .eq("id", plantId)
-          .single();
-
-        if (error || !plant) {
-          titleEl.innerText = "❌ Error loading plant.";
-          tableEl.innerHTML = "";
-          imagesEl.innerHTML = "";
-          console.error(error);
-          return;
-        }
-
-        // Update title
-        titleEl.innerText = `${plant.common_name || "-"} (${plant.scientific_name || "-"})`;
-
-        // Fill table dynamically
-        tableEl.innerHTML = `
-          <tr><th>Category</th><td>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="config.js"></script>
+  <script src="plant.js"></script>
+</body>
+</html>
