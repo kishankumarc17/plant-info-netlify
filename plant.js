@@ -1,11 +1,17 @@
 // plant.js - load plant details dynamically by ID
+
+// ✅ Initialize Supabase (use config.js or replace with real keys)
+const supabaseUrl = "https://YOUR_REAL_SUPABASE_URL.supabase.co"; // replace
+const supabaseKey = "YOUR_REAL_ANON_KEY"; // replace
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
 async function loadPlantDetails() {
   const urlParams = new URLSearchParams(window.location.search);
   const plantId = urlParams.get("id");
 
+  const container = document.getElementById("plant-card");
   if (!plantId) {
-    document.getElementById("plant-card").innerHTML =
-      "<p>❌ No plant selected.</p>";
+    container.innerHTML = "<p>❌ No plant selected.</p>";
     return;
   }
 
@@ -19,8 +25,7 @@ async function loadPlantDetails() {
 
     if (error || !plant) {
       console.error("Error fetching plant:", error?.message);
-      document.getElementById("plant-card").innerHTML =
-        "❌ Failed to load plant details.";
+      container.innerHTML = "❌ Failed to load plant details.";
       return;
     }
 
@@ -50,7 +55,7 @@ async function loadPlantDetails() {
       : "-";
 
     // ✅ Inject plant details into the table
-    document.getElementById("plant-card").innerHTML = `
+    container.innerHTML = `
       <h2>${plant.common_name || "Unknown"} 
           (${plant.scientific_name || "-"})</h2>
       <table class="plant-table">
@@ -69,9 +74,10 @@ async function loadPlantDetails() {
     `;
   } catch (err) {
     console.error("Unexpected error:", err);
-    document.getElementById("plant-card").innerHTML =
+    container.innerHTML =
       "❌ Something went wrong while loading plant.";
   }
 }
 
+// Run on page load
 window.onload = loadPlantDetails;
