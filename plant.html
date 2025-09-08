@@ -1,42 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plant Details</title>
-  <link rel="stylesheet" href="styles.css"/>
-  
-  <!-- Lightbox CSS -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet" />
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script defer src="config.js"></script>
-  <script defer src="plant.js"></script> <!-- plant.js will load single plant details -->
-  
-  <!-- Lightbox JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+    }
+    .plant-container {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      max-width: 900px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background: #f2f2f2;
+      width: 30%;
+    }
+    .images {
+      display: flex;
+      gap: 12px;
+      margin-top: 15px;
+    }
+    .images img {
+      width: 200px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>🌱 Plant Information</h1>
-  </header>
+  <div class="plant-container">
+    <h2>Aloe Vera/ಅಲೋವೇರಾ (Aloe barbadensis miller)</h2>
+    <table>
+      <tr><th>Category</th><td>Succulent / Medicinal herb</td></tr>
+      <tr><th>Date of Planting</th><td>-</td></tr>
+      <tr><th>Max Height</th><td>60–100 cm (about 2–3 feet)</td></tr>
+      <tr><th>Origin</th><td>Arabian Peninsula (now cultivated worldwide, especially in tropical and subtropical regions)</td></tr>
+      <tr><th>Water Requirement</th><td>Very low – about 300–500 ml once a week (allow soil to dry completely between watering; in hot summers it may need twice a week)</td></tr>
+      <tr><th>Seasonal Flowering</th><td>Spring to summer (yellow/orange tubular flowers)</td></tr>
+      <tr><th>Medicinal Value</th><td>Gel used for skin burns, wounds, and moisturizing. Improves digestion, has anti-inflammatory properties, and supports immune health.</td></tr>
+      <tr><th>Quantitative Data</th><td>Lifespan: 5–12 years. Mature leaf contains ~15–20 ml gel. Oxygen: Provides moderate oxygen release, especially at night (CAM plant).</td></tr>
+      <tr><th>Location</th><td>-</td></tr>
+      <tr><th>Additional Info</th><td>Aloe vera can survive without soil — its gel-filled leaves store enough water to grow even in just rocks or sand. 
+        <a href="https://en.wikipedia.org/wiki/Aloe_vera" target="_blank">Read More</a>
+      </td></tr>
+    </table>
 
-  <main class="plant-page">
-    <a class="back" href="index.html">← Back to All Plants</a>
-    
-    <!-- Plant details will load here -->
-    <div id="plant-card" class="plant-card">
-      <p>Loading plant details...</p>
+    <h3>Images</h3>
+    <div class="images">
+      <img src="your_image1.jpg" alt="Aloe Vera Image 1">
+      <img src="your_image2.jpg" alt="Aloe Vera Image 2">
     </div>
-  </main>
-
-  <!-- Optional Lightbox Settings -->
-  <script>
-    lightbox.option({
-      'resizeDuration': 200,
-      'wrapAround': true,
-      'fadeDuration': 300
-    });
-  </script>
+  </div>
 </body>
 </html>
