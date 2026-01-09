@@ -9,7 +9,7 @@ async function loadPlants() {
   }
 
   const container = document.getElementById("plant-list");
-  container.innerHTML = "";
+  container.innerHTML = ""; 
 
   if (!data || data.length === 0) {
     container.innerHTML = "<p>No plant records found in database.</p>";
